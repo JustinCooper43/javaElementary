@@ -7,19 +7,17 @@ public class Task3 {
 
     public static void main(String[] args) {
 
-        String example = " aab  a  a  ";
+        String example = " Aab  A  a  ";
 
         System.out.println("Palindrome result = " + checkPalindrome(example));
         System.out.println("Palindrome result = " + checkPalindromeChar(example));
     }
 
-    public static boolean checkPalindrome(String sentence) {
-        String[] array = sentence.split(" ");
+    private static boolean checkPalindrome(String sentence) {
+
         StringBuilder build = new StringBuilder();
 
-        for (String var : array) {
-            build.append(var);
-        }
+       build.append(sentence.replaceAll(" +","").toLowerCase());
 
         String rightOrder = build.toString();
 
@@ -28,21 +26,23 @@ public class Task3 {
         return backOrder.equals(rightOrder);
     }
 
-    public static boolean checkPalindromeChar(String phrase) {
+    private static boolean checkPalindromeChar(String phrase) {
 
-        List<Character> listFrase = new ArrayList<>();
+        List<Character> listPhrase = new ArrayList<>();
 
-        for (int i = 0; i < phrase.length(); i++) {
-            if(phrase.charAt(i) != ' ') listFrase.add(phrase.charAt(i));
+         String phraseLow = phrase.toLowerCase();
+
+        for (int i = 0; i < phraseLow.length(); i++) {
+            if(phraseLow.charAt(i) != ' ') listPhrase.add(phraseLow.charAt(i));
         }
 
         List<Character> listPhraseDes = new ArrayList<>();
 
         for (int i = phrase.length() - 1 ; i >= 0 ; i--) {
-            if(phrase.charAt(i) != ' ') listPhraseDes.add(phrase.charAt(i));
+            if(phraseLow.charAt(i) != ' ') listPhraseDes.add(phraseLow.charAt(i));
         }
 
-        return listFrase.equals(listPhraseDes);
+        return listPhrase.equals(listPhraseDes);
 
     }
 }

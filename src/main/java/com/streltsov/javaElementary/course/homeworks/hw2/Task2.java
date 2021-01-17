@@ -22,8 +22,8 @@ public class Task2 {
 
         for (int i = 0; i < sentenceLow.length(); i++) {
 
-            if (sentence.charAt(i) >= '\u0061' && sentence.charAt(i) <= '\u007A' || sentence.charAt(i) == ' ') {
-                buildCleanWords.append(sentence.charAt(i));
+            if (sentenceLow.charAt(i) >= '\u0061' && sentenceLow.charAt(i) <= '\u007A' || sentenceLow.charAt(i) == ' ') {
+                buildCleanWords.append(sentenceLow.charAt(i));
             }
 
         }

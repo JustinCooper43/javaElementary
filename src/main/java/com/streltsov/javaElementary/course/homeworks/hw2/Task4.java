@@ -4,21 +4,34 @@ public class Task4 {
 
     public static void main(String[] args) {
 
-        centuryFromYear(2001);
-
+        checkNegative(0);
     }
 
-    public static void centuryFromYear(int year) {
+    private static int centuryFromYear(int year) {
 
-        System.out.println("For year = " + year);
 
         if (year % 100 == 0) {
-            year /= 100;
+            return year / 100;
         } else {
-            year = ( year / 100 ) + 1;
+            return (year / 100) + 1;
         }
 
-        System.out.println("Century = " + year);
+
     }
 
+    private static void checkNegative(int negativeYear) {
+
+        System.out.println("For year = " + negativeYear);
+
+        if (negativeYear < 0) {
+            int result = centuryFromYear(negativeYear *= -1);
+            System.out.println("Century = " + result + " B.C.");
+
+        } else if (negativeYear == 0) {
+            System.out.println("Until the 5th century in Western Europe there was no concept of \"0\" as such");
+
+        } else {
+            System.out.println("Century = " + centuryFromYear(negativeYear));
+        }
+    }
 }
