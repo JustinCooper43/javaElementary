@@ -21,13 +21,14 @@ public class Task1 {
 
     private static void print(int[][] arr) {
 
-        printTwoDimensionArr(arr,arr.length);
-        System.out.println(buildRecursion.reverse().toString());
+        printArray(arr,arr.length);
+        System.out.println( buildRecursion.deleteCharAt(buildRecursion.length()-1).reverse().toString());
+
 
     }
 
 
-    private static int printTwoDimensionArr(int[][] twoDimensionArr, int lengthTwoDimArr){
+    private static int printArray(int[][] twoDimensionArr, int lengthTwoDimArr){
 
         if (lengthTwoDimArr == 0) {
             return 0;
@@ -37,7 +38,10 @@ public class Task1 {
 
         printOneDimensionArr(oneDimensionArr,oneDimensionArr.length);
 
-        return printTwoDimensionArr(twoDimensionArr,lengthTwoDimArr-1);
+        buildRecursion.append("\n");
+
+        return printArray(twoDimensionArr,lengthTwoDimArr-1);
+
 
     }
 
