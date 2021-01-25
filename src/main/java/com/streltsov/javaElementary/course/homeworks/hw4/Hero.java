@@ -5,13 +5,13 @@ public abstract class  Hero {
     String name;
     Integer power;
     Integer healthPoints;
+    Skill skillHero;
 
-
-    public Hero(String name, Integer power, Integer healthPoints) {
+    public Hero(String name, Integer power, Integer healthPoints, String skillHero) {
         this.name = name;
         this.power = power;
         this.healthPoints = healthPoints;
-
+        this.skillHero = new Skill(skillHero);
     }
 
     @Override

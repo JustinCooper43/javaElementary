@@ -4,8 +4,8 @@ public class Wizard extends Hero {
 
     Eagle eagle;
 
-    public Wizard(String name, Integer power, Integer healthPoints) {
-        super(name, power, healthPoints);
+    public Wizard(String name, Integer power, Integer healthPoints, String skillHero) {
+        super(name, power, healthPoints, skillHero);
     }
 
     public void summonEagle(String name, String type ) {

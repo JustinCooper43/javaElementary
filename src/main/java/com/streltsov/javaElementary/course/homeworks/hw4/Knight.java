@@ -3,8 +3,8 @@ package com.streltsov.javaElementary.course.homeworks.hw4;
 public class Knight extends  Hero {
 
 
-    public Knight(String name, Integer power, Integer healthPoints) {
-        super(name, power, healthPoints);
+    public Knight(String name, Integer power, Integer healthPoints, String skillHero) {
+        super(name, power, healthPoints, skillHero);
     }
 
     public void hitOfSword(){

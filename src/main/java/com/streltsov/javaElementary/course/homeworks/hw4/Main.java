@@ -6,9 +6,9 @@ public class Main {
 
         Team lordOfTheRing = new Team("The Fellowship of the Ring", "Rivendell");
 
-        Wizard gandalf = new Wizard("Gandalf", 100, 50);
-        Archer legolas = new Archer("Legolas", 146, 139);
-        Knight aragorn = new Knight("Aragorn", 150, 100);
+        Wizard gandalf = new Wizard("Gandalf", 100, 50, "You shall not pass");
+        Archer legolas = new Archer("Legolas", 146, 139,"Immortality" );
+        Knight aragorn = new Knight("Aragorn", 150, 100,"Just a good fella");
 
         lordOfTheRing.listOfTeam[0] = gandalf;
         lordOfTheRing.listOfTeam[1] = legolas;
@@ -28,8 +28,9 @@ public class Main {
 
         System.out.println(lordOfTheRing.toString());
 
-
-        System.out.println( legolas.getSkillArcher().toString()); // Composition
+        System.out.println(gandalf.skillHero.toString());
+        System.out.println(legolas.skillHero.toString());
+        System.out.println(aragorn.skillHero.toString());
 
 
 

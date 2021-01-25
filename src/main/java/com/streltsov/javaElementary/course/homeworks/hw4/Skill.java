@@ -11,6 +11,6 @@ public class Skill {
     @Override
     public String toString() {
         return "I have "+ '\''  + nameSkill + '\'' +
-                "and you do not";
+                " skill and you do not";
     }
 }
