@@ -29,6 +29,7 @@ public class Main {
         System.out.println(lordOfTheRing.toString());
 
 
+        System.out.println( legolas.getSkillArcher().toString()); // Composition
 
 
 
