@@ -18,6 +18,7 @@ public class Main {
 
         gandalf.summonEagle("Jone", "Black");
         gandalf.fireBall();
+        gandalf.eagle.battleRoar();
 
         System.out.println(legolas.toString());
         legolas.shotBow();
@@ -26,6 +27,10 @@ public class Main {
         aragorn.hitOfSword();
 
         System.out.println(lordOfTheRing.toString());
+
+
+
+
 
 
 

@@ -8,6 +8,7 @@ public class Team {
     String country;
     Hero [] listOfTeam = new Hero[5];
 
+
     public Team(String nameOfTeam, String country) {
         this.nameOfTeam = nameOfTeam;
         this.country = country;

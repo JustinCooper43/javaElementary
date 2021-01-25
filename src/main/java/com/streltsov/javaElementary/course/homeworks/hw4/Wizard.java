@@ -2,13 +2,14 @@ package com.streltsov.javaElementary.course.homeworks.hw4;
 
 public class Wizard extends Hero {
 
+    Eagle eagle;
 
     public Wizard(String name, Integer power, Integer healthPoints) {
         super(name, power, healthPoints);
     }
 
     public void summonEagle(String name, String type ) {
-        new Eagle(name, type);
+        this.eagle = new Eagle(name, type);
     }
 
     public void fireBall() {

@@ -11,6 +11,10 @@ public class Eagle {
     }
 
 
+    public void battleRoar() {
+        System.out.println("I am eeeeeeeeeeeeeeeagle!!!!!!");
+    }
+
     @Override
     public String toString() {
         return " Hello. I am Eagle. How do you do? ";
