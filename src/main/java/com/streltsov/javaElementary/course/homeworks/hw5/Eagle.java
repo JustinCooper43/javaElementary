@@ -1,6 +1,6 @@
 package com.streltsov.javaElementary.course.homeworks.hw5;
 
- class Eagle {
+class Eagle {
 
     private String name;
     private String typeOfEagle;

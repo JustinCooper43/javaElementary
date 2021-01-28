@@ -6,9 +6,9 @@ public class Main {
 
         Team lordOfTheRing = new Team("The Fellowship of the Ring", "Rivendell");
 
-        Wizard gandalf = new Wizard("Gandalf", 100, 50, "You shall not pass");
-        Archer legolas = new Archer("Legolas", 146, 139, "Immortality");
-        Knight aragorn = new Knight("Aragorn", 150, 100, "Just a good fella");
+        Wizard gandalf = new Wizard("Gandalf", 100, 50, "You shall not pass", "Magical");
+        Archer legolas = new Archer("Legolas", 146, 139, "Immortality", "Chemical");
+        Knight aragorn = new Knight("Aragorn", 150, 100, "Just a good fella", "Physical");
 
         lordOfTheRing.listOfTeam[0] = gandalf;
         lordOfTheRing.listOfTeam[1] = legolas;
@@ -19,14 +19,11 @@ public class Main {
         Eagle eagle = new Eagle("Sebastian", "Scarlet");
 
         gandalf.summonEagle("Jone", "Black");
-        gandalf.fireBall();
+        gandalf.summonEagle("Benedict", "White power");
+
+
         gandalf.eagle.battleRoar();
 
-        System.out.println(legolas.toString());
-        legolas.shotBow();
-
-        System.out.println(aragorn.toString());
-        aragorn.hitOfSword();
 
         System.out.println(lordOfTheRing.toString());
 
@@ -37,9 +34,9 @@ public class Main {
         // homework5
         System.out.println();
 
-        lordOfTheRing.attack(legolas, "Chemical");
-        lordOfTheRing.attack(aragorn, "Physical");
-        lordOfTheRing.attack(gandalf, "Magical");
+        lordOfTheRing.attack(gandalf);
+        lordOfTheRing.attack(legolas);
+        lordOfTheRing.attack(aragorn);
 
         System.out.println();
 
@@ -68,6 +65,19 @@ public class Main {
         System.out.println(lordOfTheRing.getNameOfTeam());
         System.out.println(lordOfTheRing.getCountry());
         System.out.println(lordOfTheRing.getListOfTeam());
+
+        System.out.println();
+
+        lordOfTheRing.toProtect(gandalf);
+        lordOfTheRing.toProtect(legolas);
+        lordOfTheRing.toProtect(aragorn);
+
+        System.out.println();
+
+        lordOfTheRing.attack(gandalf);
+        lordOfTheRing.attack(legolas);
+        lordOfTheRing.attack(aragorn);
+
 
     }
 }

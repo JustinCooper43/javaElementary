@@ -1,25 +1,27 @@
 package com.streltsov.javaElementary.course.homeworks.hw5;
 
-class Wizard extends Hero implements Attack {
+class Wizard extends Hero implements Attacker, Protector {
 
 
     Eagle eagle;
 
-    Wizard(String name, Integer power, Integer healthPoints, String skillHero) {
-        super(name, power, healthPoints, skillHero);
+    public Wizard(String name, Integer power, Integer healthPoints, String skillHero, String typeOfDamage) {
+        super(name, power, healthPoints, skillHero, typeOfDamage);
     }
 
-     void summonEagle(String name, String type ) {
+    void summonEagle(String name, String type) {
         this.eagle = new Eagle(name, type);
     }
 
-     void fireBall() {
-        System.out.println( "My fireball will destroy all enemies");
+
+    @Override
+    public void makeAttack() {
+        System.out.println("My fireball will destroy all enemies." + " This is " + typeOfDamage + " damage, babe");
     }
 
     @Override
-    public void typeOfDamage(String nameDamage) {
-        System.out.println("I have got a magic staff and  do " + nameDamage + " damage");
+    public void toProtect() {
+        System.out.println("I'm " + getName() + " will give  all my " + getPower() * 0.9 + " points of protect");
     }
 
     @Override
@@ -33,5 +35,6 @@ class Wizard extends Hero implements Attack {
     public Eagle getEagle() {
         return eagle;
     }
+
 
 }

@@ -15,9 +15,14 @@ class Team {
 
     }
 
-    void attack(Attack subject, String nameAttack) {
-        subject.typeOfDamage(nameAttack);
+    void attack(Attacker subject) {
+        subject.makeAttack();
     }
+
+    void toProtect(Protector subjectCanProtect) {
+        subjectCanProtect.toProtect();
+    }
+
 
     @Override
     public String toString() {

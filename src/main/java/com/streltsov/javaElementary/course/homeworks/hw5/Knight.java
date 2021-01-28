@@ -1,20 +1,20 @@
 package com.streltsov.javaElementary.course.homeworks.hw5;
 
- class Knight extends  Hero implements Attack{
+class Knight extends Hero implements Attacker, Protector {
 
 
-    public Knight(String name, Integer power, Integer healthPoints, String skillHero) {
-        super(name, power, healthPoints, skillHero);
+    public Knight(String name, Integer power, Integer healthPoints, String skillHero, String typeOfDamage) {
+        super(name, power, healthPoints, skillHero, typeOfDamage);
     }
-
-    public void hitOfSword(){
-        System.out.println("I will finish him off with my sword");
-    }
-
 
     @Override
-    public void typeOfDamage(String nameDamage) {
-        System.out.println("I have got sharp sword and  do " + nameDamage + " damage");
+    public void makeAttack() {
+        System.out.println("I will finish him off with my sword." + " This is " + typeOfDamage + " damage, babe");
+    }
+
+    @Override
+    public void toProtect() {
+        System.out.println("I'm " + getName() + " will give all my " + getHealthPoints() * 0.6 + " points of protect");
     }
 
     @Override

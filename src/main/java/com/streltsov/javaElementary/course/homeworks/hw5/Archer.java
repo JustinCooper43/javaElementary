@@ -1,19 +1,21 @@
 package com.streltsov.javaElementary.course.homeworks.hw5;
 
-class Archer extends Hero implements Attack {
+class Archer extends Hero implements Attacker, Protector {
 
 
-    Archer(String name, Integer power, Integer healthPoints, String skillHero) {
-        super(name, power, healthPoints, skillHero);
+    Archer(String name, Integer power, Integer healthPoints, String skillHero, String typeOfDamage) {
+        super(name, power, healthPoints, skillHero, typeOfDamage);
     }
 
-    void shotBow() {
-        System.out.println("Straight to the bull's eye");
+
+    @Override
+    public void makeAttack() {
+        System.out.println("Straight to the bull's eye!" + " This is " + typeOfDamage + " damage, babe");
     }
 
     @Override
-    public void typeOfDamage(String nameDamage) {
-        System.out.println("I have got poison arrows and  do " + nameDamage + " damage");
+    public void toProtect() {
+        System.out.println("I'm " + getName() + " will give  all my " + getHealthPoints() * 0.8 + " points of protect");
     }
 
     @Override
