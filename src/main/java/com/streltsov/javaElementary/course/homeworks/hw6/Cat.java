@@ -5,4 +5,6 @@ class Cat extends Dog {
     public Cat(String name, int number) {
         super(name, number);
     }
+
+
 }

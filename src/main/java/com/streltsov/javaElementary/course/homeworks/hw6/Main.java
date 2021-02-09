@@ -65,6 +65,8 @@ public class Main {
 
         System.out.println(listCat.toString());
 
+        listCat.add(null);
+
 
     }
 
