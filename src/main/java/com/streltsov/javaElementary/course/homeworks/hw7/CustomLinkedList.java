@@ -2,18 +2,17 @@ package com.streltsov.javaElementary.course.homeworks.hw7;
 
 import com.streltsov.javaElementary.course.homeworks.hw6.DynamicList;
 
+import java.util.Objects;
+
 public class CustomLinkedList implements DynamicList {
 
     int size = 0;
 
     Node head = null;
     Node tail = null;
-    
+
     @Override
     public boolean add(Object o) {
-        if (o == null) {
-            throw new NullPointerException();
-        }
         if (size == 0) {
             return initHead(o);
         }
@@ -29,7 +28,7 @@ public class CustomLinkedList implements DynamicList {
         size++;
         return true;
     }
-    
+
     private static class Node {
 
         Node prev;
@@ -60,87 +59,93 @@ public class CustomLinkedList implements DynamicList {
         size++;
         return true;
     }
-    
-    @Override
-    public Object removeFirst(Object o) {
 
-        if (o == null) {
-            throw new NullPointerException();
-        }
+    @Override
+    public boolean removeFirst(Object o) {
 
         Node removeObject = head;
 
-        if (head.element.equals(o)) {
+        if (Objects.equals(removeObject.element, o)) {
             this.head = removeObject.next;
+            head.prev = null;
             size--;
-            return removeObject.element;
+            return true;
         }
-
-        if (tail.element.equals(o) & removeObject == tail) {
-            this.tail = removeObject.prev;
-            size--;
-            return removeObject.element;
-        }
-
-        for (int i = 0; i < size; i++){
-
-            if (removeObject.element.equals(o)) {
-                return findObject(i).element;
+        for (int i = 1; i < size - 1; i++) {
+            if (Objects.equals(removeObject.element, o)) {
+                redirectNode(removeObject);
+                return true;
             }
             removeObject = removeObject.next;
         }
-        return null;
+        if (Objects.equals(removeObject.element, o)) {
+            this.tail = removeObject.prev;
+            tail.prev = null;
+            size--;
+            return true;
+        }
+        return false;
     }
 
     @Override
     public Object remove(int index) {
-
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
-        return findObject(index).element;
+        checkOfBounds(index);
+        return removeByIndex(index).element;
     }
 
-    private Node findObject(int indexPlace) {
+    private Node removeByIndex(int indexPlace) {
 
-        Node soughtNode = head;
+        Node currentNode = head;
 
         if (indexPlace == 0) {
-            this.head = soughtNode.next;
+            this.head = currentNode.next;
+            head.prev = null;
             size--;
-            return soughtNode;
+            return currentNode;
         } else if (indexPlace == size - 1) {
-            this.tail = soughtNode.prev;
+            this.tail = currentNode.prev;
+            tail.prev = null;
             size--;
-            return soughtNode;
+            return currentNode;
         }
-        for (int i = 0; i < indexPlace; i++) {
-            soughtNode = soughtNode.next;
+        if (indexPlace <= size / 2) {
+            for (int i = 1; i <= indexPlace; i++) {
+                currentNode = currentNode.next;
+            }
+            redirectNode(currentNode);
+        } else {
+            currentNode = tail;
+            for (int i = size - 2; i >= indexPlace; i--) {
+                currentNode = currentNode.prev;
+            }
+            redirectNode(currentNode);
+            return currentNode;
         }
-        soughtNode.prev.next = soughtNode.next;
-        soughtNode.next.prev = soughtNode.prev;
+        return currentNode;
+    }
+
+    private void redirectNode(Node currentNode) {
+        currentNode.prev.next = currentNode.next;
+        currentNode.next.prev = currentNode.prev;
         size--;
-        return soughtNode;
     }
 
     @Override
     public void removeAll() {
-        this.head = null;
-        this.tail = null;
+        Node currentNode = head;
+        for (int i = 0; i < size; i++) {
+            currentNode.element = null;
+            currentNode.prev = null;
+            currentNode = currentNode.next;
+        }
         size = 0;
     }
 
     @Override
     public Object replace(int index, Object o) {
+        checkOfBounds(index);
 
-        if (o == null) {
-            throw new NullPointerException();
-        }
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
-        Node replaceNode = findObject(index);
-
+        Node replaceNode = findNode(index);
         Object result = replaceNode.element;
         replaceNode.element = o;
         return result;
@@ -148,78 +153,64 @@ public class CustomLinkedList implements DynamicList {
 
     @Override
     public Object get(int index) {
-        
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
+        checkOfBounds(index);
+        return findNode(index).element;
+    }
+
+    private Node findNode (int indexNumber){
+        Node getNode = head;
+        for (int i = 0; i <= indexNumber; i++) {
+            getNode = getNode.next;
         }
-        return findObject(index).element;
+        return getNode;
     }
 
     @Override
     public boolean addAll(DynamicList list) {
-
         if (list == null) {
             throw new NullPointerException();
         }
-
-        for (int i = 0; i < list.size(); i++) {
-            if (size == 0) {
-                return initHead(list.get(i));
-            }
-            Node nodeTail = head;
-            for(int k = 0; k < size - 1; k++) {
-                nodeTail = nodeTail.next;
-            }
-            tail = nodeTail;
-            Node tmp = tail;
-            tail = new Node(list.get(i));
-            if (tmp != null) {
-                tmp.next = tail;
-                tail.prev = tmp;
-            } else {
-                head.next = tail;
-                tail.prev = head;
-            }
-            size++;
+        for (int i = 0; i < list.size() - 1; i++) {
+            add(list.get(i));
         }
         return true;
     }
 
+
     @Override
     public DynamicList sublist(int fromIndex) {
-
-        if (fromIndex < 0 || fromIndex >= size) {
-            throw new IndexOutOfBoundsException();
-        }
-        DynamicList subList = new CustomLinkedList();
-        Node listElement = head;
-
-        for (int i = 0; i < size; i++) {
-            if (i >= fromIndex) {
-                subList.add(listElement);
-            }
-            listElement = listElement.next;
-        }
-        return subList;
+        checkOfBounds(fromIndex);
+        return sublist(fromIndex, size() - 1);
     }
 
     @Override
     public DynamicList sublist(int fromIndex, int toIndex) {
-        if (fromIndex < 0 || fromIndex >= size ||
-                toIndex < 0 || toIndex >= size ||
-                fromIndex > toIndex) {
-            throw new IndexOutOfBoundsException();
-        }
+        checkOfBounds(fromIndex, toIndex);
+
         DynamicList subList = new CustomLinkedList();
         Node listElement = head;
 
         for (int i = 0; i < toIndex; i++) {
             if (i >= fromIndex) {
-                subList.add(listElement);
+                subList.add(listElement.element);
             }
             listElement = listElement.next;
         }
         return subList;
+    }
+
+    private void checkOfBounds(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    private void checkOfBounds(int fromIndex, int toIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
+        if (fromIndex > toIndex) {
+            throw new IllegalArgumentException();
+        }
+        checkOfBounds(fromIndex);
+        checkOfBounds(toIndex);
     }
 
     @Override
@@ -243,6 +234,7 @@ public class CustomLinkedList implements DynamicList {
         }
         return builder.toString();
     }
+
 
 
 }

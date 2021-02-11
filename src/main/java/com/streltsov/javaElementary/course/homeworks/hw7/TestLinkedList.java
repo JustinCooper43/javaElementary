@@ -48,7 +48,9 @@ public class TestLinkedList {
         listSpiderVerse.add(spiderHero3);
         listSpiderVerse.add(spiderHero4);
 
-        Object removeFirstHero = listAvengers.removeFirst(marvel2); // removeFirst
+        listAvengers.add(null);
+
+        Object removeFirstHero = listAvengers.removeFirst(marvel1); // removeFirst
 
         Object removeHero = listJusticeLeague.remove(3); // remove
 
@@ -58,9 +60,13 @@ public class TestLinkedList {
 
         listAvengers.addAll(listSpiderVerse); // addAll
 
+        listAvengers.removeFirst(null);
+
         DynamicList partList = listAvengers.sublist(2); // sublist from
 
         DynamicList fromToList = listAvengers.sublist(3, 4); // sublist from to
+
+        listAvengers.removeAll();
 
     }
 }

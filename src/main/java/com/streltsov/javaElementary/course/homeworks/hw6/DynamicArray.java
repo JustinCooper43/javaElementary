@@ -1,6 +1,7 @@
 package com.streltsov.javaElementary.course.homeworks.hw6;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class DynamicArray implements DynamicList {
 
@@ -32,31 +33,17 @@ public class DynamicArray implements DynamicList {
     }
 
     @Override
-    public Object removeFirst(Object o) {
+    public boolean removeFirst(Object o) {
 
-        Object result;
-
-        if (o == null) {
             for (int i = 0; i < index; i++) {
-                if (coreArray[i] == (o)) {
-                    result = coreArray[i];
+                if (Objects.equals(coreArray[i], o)) {
                     System.arraycopy(coreArray, i + 1, coreArray, i, index - i - 1);
                     index--;
-                    return result;
+                    return true;
                 }
             }
-        }else {
-            for (int i = 0; i < index; i++) {
-                if (coreArray[i].equals(o)) {
-                    result = coreArray[i];
-                    System.arraycopy(coreArray, i + 1, coreArray, i, index - i - 1);
-                    index--;
-                    return result;
-                }
-            }
-        }
+        return false;
 
-        return null;
     }
 
     @Override
@@ -142,7 +129,7 @@ public class DynamicArray implements DynamicList {
 
     @Override
     public int size() {
-        return this.index;
+        return this.index + 1;
     }
 
     private void scaleCoreArray() {
