@@ -61,10 +61,9 @@ public class Main {
 
         subList.removeAll();
 
-        subList.remove(5);
+        subList.add(cat1);
 
-        System.out.println(listCat.toString());
-
+        subList.removeAll();
 
     }
 

@@ -1,6 +1,7 @@
 package com.streltsov.javaElementary.course.homeworks.hw6;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class DynamicArray implements DynamicList {
 
@@ -23,38 +24,29 @@ public class DynamicArray implements DynamicList {
         if (milestone == index) {
             scaleCoreArray();
         }
-
         coreArray[index] = o;
         index++;
         return true;
-
     }
 
     @Override
-    public Object removeFirst(Object o) {
+    public boolean removeFirst(Object o) {
 
-        int i;
-        for (i = 0; i < index; i++) {
-
-            if (coreArray[i] == o) {
+        for (int i = 0; i < index; i++) {
+            if (Objects.equals(coreArray[i],o)) {
                 System.arraycopy(coreArray, i + 1, coreArray, i, index - i - 1);
                 index--;
-                break;
-
+                return true;
             }
         }
-        return coreArray[i];
+        return false;
     }
-
 
     @Override
     public Object remove(int index) {
 
-        if (!checkValidOfIndex(index)) {
+        checkValidOfIndex(index);
 
-
-            return null;
-        }
         Object removeObject = coreArray[index];
         System.arraycopy(coreArray, index + 1, coreArray, index, this.index - index - 1);
         this.index--;
@@ -65,81 +57,68 @@ public class DynamicArray implements DynamicList {
 
     @Override
     public void removeAll() {
+        for(int i = 0; i < size() - 1; i++){
+            coreArray[i] = null;
+        }
         coreArray = new Object[10];
         this.index = 0;
     }
 
     @Override
     public Object replace(int index, Object o) {
-
-        if (checkValidOfIndex(index)) {
+        checkValidOfIndex(index);
             Object tmp = coreArray[index];
             coreArray[index] = o;
             return tmp;
-
-        }
-        return null;
-
     }
 
     @Override
     public Object get(int index) {
-        if (checkValidOfIndex(index)) {
-            return coreArray[index];
-        }
-        return null;
+        checkValidOfIndex(index);
+        return coreArray[index];
     }
-
 
     @Override
     public boolean addAll(DynamicList list) {
 
         if (list == null) {
-            return false;
+            throw new NullPointerException();
         }
-        int i, k;
 
-        int newSizeOfArray = index + list.size();
-        coreArray = Arrays.copyOf(coreArray, newSizeOfArray + 1);
-        for (i = index, k = 0; i < newSizeOfArray; i++, k++) {
-            coreArray[i] = list.get(k);
-            index++;
+        int newSizeOfArray = index + list.size()-1;
+
+        coreArray = Arrays.copyOf(coreArray, newSizeOfArray);
+        for (int i = 0; i < list.size(); i++) {
+            add(list.get(i));
         }
+        this.index = newSizeOfArray;
         return true;
     }
 
     @Override
     public DynamicList sublist(int fromIndex) {
-        if (checkValidOfIndex(fromIndex)) {
-
-            Object[] subArray = new Object[index - fromIndex];
-
-            System.arraycopy(coreArray, fromIndex, subArray, 0, index - fromIndex);
-
-            return new DynamicArray(subArray);
-        }
-
-        return null;
+        checkValidOfIndex(fromIndex);
+        return sublist(fromIndex,size() - 1);
     }
 
     @Override
     public DynamicList sublist(int fromIndex, int toIndex) {
 
+        checkValidOfIndex(fromIndex);
+        checkValidOfIndex(toIndex);
 
-        if (checkValidOfIndex(fromIndex) & checkValidOfIndex(toIndex)) {
+        int lengthSubArray = toIndex - fromIndex;
 
-            Object[] staticArray = new Object[toIndex - fromIndex];
+        Object[] internalArrayForSublist = new Object[lengthSubArray];
 
-            System.arraycopy(coreArray, fromIndex, staticArray, 0, toIndex - fromIndex);
+        System.arraycopy(coreArray, fromIndex, internalArrayForSublist, 0, lengthSubArray);
 
-            return new DynamicArray(staticArray);
-        }
-        return null;
+        return new DynamicArray(internalArrayForSublist);
     }
 
     @Override
     public int size() {
-        return this.index;
+        return this.index + 1;
     }
 
     private void scaleCoreArray() {
@@ -149,14 +128,10 @@ public class DynamicArray implements DynamicList {
         coreArray = Arrays.copyOf(coreArray, desireArrayCapacity);
     }
 
-    boolean checkValidOfIndex(int index) {
-
-        if (index < this.index && index >= 0) {
-            return true;
+    void checkValidOfIndex(int index) {
+        if (index > this.index && index <= 0) {
+            throw new IndexOutOfBoundsException("Index is not in the valid range ( available : 0 - " + this.index + " )");
         }
-
-        System.out.println("Index is not in the valid range ( available : 0 - " + this.index + " )");
-        return false;
     }
 
     @Override

@@ -9,21 +9,21 @@ public interface DynamicList {
      *
      * @param o Object to remove
      */
-    Object removeFirst(Object o);
+    boolean removeFirst(Object o);
 
-    Object remove(int index);
+    Object remove(int index)throws IndexOutOfBoundsException;
 
     void removeAll();
 
-    Object replace(int index, Object o);
+    Object replace(int index, Object o) throws IndexOutOfBoundsException;
 
-    Object get(int index);
+    Object get(int index) throws IndexOutOfBoundsException;
 
-    boolean addAll(DynamicList list);
+    boolean addAll(DynamicList list) throws NullPointerException;
 
-    DynamicList sublist(int fromIndex);
+    DynamicList sublist(int fromIndex) throws IndexOutOfBoundsException;
 
-    DynamicList sublist(int fromIndex, int toIndex);
+    DynamicList sublist(int fromIndex, int toIndex) throws IndexOutOfBoundsException;
 
     int size();
 
